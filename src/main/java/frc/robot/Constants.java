@@ -20,4 +20,17 @@ public final class Constants {
     public static final int encoderLportB = 1;
     public static final int encoderRportA = 2;
     public static final int encoderRportB = 3;
+
+    public static final int vPortR1 = 0;
+    public static final int vPortR2 = 1;
+    public static final int vPortR3 = 2;
+    public static final int vPortL1 = 3;
+    public static final int vPortL2 = 4;
+    public static final int vPortL3 = 5;
+
+    public static final int stickPortL = 0;
+    public static final int stickPortR = 1;
+
+    //public static final int leftAxis = 0;
+    //public static final int rightAxis = 1;
 }
