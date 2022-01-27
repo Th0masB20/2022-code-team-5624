@@ -31,6 +31,6 @@ public final class Constants {
     public static final int stickPortL = 0;
     public static final int stickPortR = 1;
 
-    //public static final int leftAxis = 0;
-    //public static final int rightAxis = 1;
+    public static final int solenoidPort1 = 0;
+    public static final int solenoidPort2 = 1;
 }
