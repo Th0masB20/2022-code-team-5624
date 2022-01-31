@@ -6,12 +6,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.GearboxPistonSubsystem;
+import frc.robot.subsystems.IntakePistonSubsystem;
 
-public class PistonCommand extends CommandBase {
-  GearboxPistonSubsystem pistonSub;
-  /** Creates a new PistonCommand. */
-  public PistonCommand(GearboxPistonSubsystem piston) {
+public class IntakePistonCommand extends CommandBase {
+  IntakePistonSubsystem pistonSub;
+  /** Creates a new IntakePistonCommand. */
+  public IntakePistonCommand(IntakePistonSubsystem piston) {
     pistonSub = piston;
     addRequirements(pistonSub);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -24,7 +24,7 @@ public class PistonCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pistonSub.UsePistons(RobotContainer.stickRight.getRawButton(2));
+    pistonSub.intakePistons(RobotContainer.xboxController);
   }
 
   // Called once the command ends or is interrupted.

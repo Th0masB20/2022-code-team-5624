@@ -10,6 +10,8 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/DriveSubsystem": "Subsystem",
+      "/LiveWindow/GearboxPistonSubsystem": "Subsystem",
+      "/LiveWindow/IntakePistonSubsystem": "Subsystem",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
     }
   }

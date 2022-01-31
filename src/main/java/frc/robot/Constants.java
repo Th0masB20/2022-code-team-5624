@@ -30,7 +30,16 @@ public final class Constants {
 
     public static final int stickPortL = 0;
     public static final int stickPortR = 1;
+    public static final int xboxPort = 2;
 
     public static final int solenoidPort1 = 0;
     public static final int solenoidPort2 = 1;
+
+    public static final int solenoidPort3 = 2;
+    public static final int solenoidPort4 = 3;
+
+    public static final int intakeSolonoidPort1 = 4;
+    public static final int intakeSolonoidPort2 = 5;
+
+  
 }

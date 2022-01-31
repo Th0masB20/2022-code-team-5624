@@ -4,40 +4,37 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class GearboxPistonSubsystem extends SubsystemBase {
-  Solenoid solenoid1;
-  Solenoid solenoid2;
+  DoubleSolenoid solenoid1;
   int counter = 0;
   long timer = 0;
   /** Creates a new GearboxPistonSubsystem. */
   public GearboxPistonSubsystem() {
-    solenoid1 = new Solenoid(PneumaticsModuleType.REVPH,Constants.solenoidPort1);
-    solenoid2 = new Solenoid(PneumaticsModuleType.REVPH,Constants.solenoidPort2);
+    solenoid1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.solenoidPort1,Constants.solenoidPort2);
   }
 
   public void UsePistons(boolean activate) {
     if(activate && counter == 0 && cooldown(timer)) {
-      solenoid1.set(true);
-      solenoid2.set(true);
+      solenoid1.set(Value.kForward);
       timer = System.currentTimeMillis();
       counter++;
       activate = false;
     }
     if(activate && counter == 1 && cooldown(timer)) {
-      solenoid1.set(false);
-      solenoid2.set(false);
+      solenoid1.set(Value.kReverse);
       timer = System.currentTimeMillis();
       counter--;
       activate = false;
     }
   }
   public boolean cooldown(long startTime) {
-    long cooldownTime = System.currentTimeMillis()-startTime;
+    long cooldownTime = System.currentTimeMillis() - startTime;
     return (cooldownTime > 250);
   }
   @Override
