@@ -6,15 +6,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.IntakePistonSubsystem;
+import frc.robot.subsystems.MotorSubsystem;
 
-public class IntakePistonCommand extends CommandBase {
-  IntakePistonSubsystem pistonSub;
-  /** Creates a new IntakePistonCommand. */
-  public IntakePistonCommand(IntakePistonSubsystem piston) {
-    pistonSub = piston;
-    addRequirements(pistonSub);
+public class MotorCommand extends CommandBase {
+  MotorSubsystem motorSub;
+  /** Creates a new IntakeBeltCommand. */
+  public MotorCommand(MotorSubsystem motorSub) {
+    this.motorSub = motorSub;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(this.motorSub);
   }
 
   // Called when the command is initially scheduled.
@@ -24,7 +24,9 @@ public class IntakePistonCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pistonSub.intakePistons(RobotContainer.xboxController);
+    motorSub.useBeltMotor(RobotContainer.xboxController.getLeftY());
+    motorSub.useIntakeMotor(RobotContainer.xboxController.getRightTriggerAxis());
+    motorSub.usePistonMotors(RobotContainer.xboxController.getLeftX());
   }
 
   // Called once the command ends or is interrupted.

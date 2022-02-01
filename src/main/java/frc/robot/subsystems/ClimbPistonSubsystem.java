@@ -10,24 +10,25 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class GearboxPistonSubsystem extends SubsystemBase {
-  DoubleSolenoid solenoid1;
-  int counter = 0;
+public class ClimbPistonSubsystem extends SubsystemBase {
+  DoubleSolenoid climbSolenoid;
+  int counter = 0; 
+  long start = 0;
   long timer = 0;
-  /** Creates a new GearboxPistonSubsystem. */
-  public GearboxPistonSubsystem() {
-    solenoid1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.solenoidPort1,Constants.solenoidPort2);
+  /** Creates a new PistonSubsystem. */
+  public ClimbPistonSubsystem() {
+    climbSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.climbSolenoidPort1,Constants.climbSolenoidPort2);
   }
-
-  public void UsePistons(boolean activate) {
+  
+  public void useClimbPistons(boolean activate) {
     if(activate && counter == 0 && cooldown(timer)) {
-      solenoid1.set(Value.kForward);
+      climbSolenoid.set(Value.kForward);
       timer = System.currentTimeMillis();
       counter++;
       activate = false;
     }
     if(activate && counter == 1 && cooldown(timer)) {
-      solenoid1.set(Value.kReverse);
+      climbSolenoid.set(Value.kReverse);
       timer = System.currentTimeMillis();
       counter--;
       activate = false;
@@ -37,6 +38,7 @@ public class GearboxPistonSubsystem extends SubsystemBase {
     long cooldownTime = System.currentTimeMillis() - startTime;
     return (cooldownTime > 250);
   }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

@@ -34,12 +34,21 @@ public final class Constants {
 
     public static final int solenoidPort1 = 0;
     public static final int solenoidPort2 = 1;
-
     public static final int solenoidPort3 = 2;
     public static final int solenoidPort4 = 3;
 
     public static final int intakeSolonoidPort1 = 4;
     public static final int intakeSolonoidPort2 = 5;
 
-  
+    public static final int climbSolenoidPort1 = 6;
+    public static final int climbSolenoidPort2 = 7;
+
+    public static final int gearAxis = 0;
+    public static final int intakeAxis = 1;
+    public static final int climbAxis = 2;
+
+    public static final int intakeMotorPort = 6;
+    public static final int beltMotorPort = 7;
+    public static final int pistonMotorPort1 = 8;
+    public static final int pistonMotorPort2 = 9;
 }

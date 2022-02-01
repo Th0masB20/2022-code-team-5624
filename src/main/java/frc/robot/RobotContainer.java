@@ -9,11 +9,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.GearPistonCommand;
-import frc.robot.commands.IntakePistonCommand;
+import frc.robot.commands.MotorCommand;
+import frc.robot.commands.PistonCommand;
+import frc.robot.subsystems.ClimbPistonSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.GearboxPistonSubsystem;
+import frc.robot.subsystems.GearPistonSubsystem;
 import frc.robot.subsystems.IntakePistonSubsystem;
+import frc.robot.subsystems.MotorSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -25,21 +27,26 @@ public class RobotContainer {
   public static XboxController xboxController;
   public static Joystick stickLeft, stickRight;
   DriveSubsystem driveSub;
-  DriveCommand driveCmd;
-  GearboxPistonSubsystem gearPistonSub;
-  GearPistonCommand gearPistonCmd;
+  GearPistonSubsystem gearPistonSub;
   IntakePistonSubsystem intakePistonSub;
-  IntakePistonCommand intakePistonCmd;
+  ClimbPistonSubsystem climbPistonSub;
+  MotorSubsystem motorIntakeSub;
+
+  DriveCommand driveCmd;
+  PistonCommand pistonCmd;
+  MotorCommand intakeCmd;
   // The robot's subsystems and commands are defined here...
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driveSub = new DriveSubsystem();
-    gearPistonSub = new GearboxPistonSubsystem();
+    gearPistonSub = new GearPistonSubsystem();
     intakePistonSub = new IntakePistonSubsystem();
-
+    climbPistonSub = new ClimbPistonSubsystem();
+    motorIntakeSub = new MotorSubsystem();
+    ////////////////////////////////////////////////////////////
     driveCmd = new DriveCommand(driveSub);
-    gearPistonCmd = new GearPistonCommand(gearPistonSub);
-    intakePistonCmd = new IntakePistonCommand(intakePistonSub);
+    pistonCmd = new PistonCommand(climbPistonSub, gearPistonSub, intakePistonSub);
+    intakeCmd = new MotorCommand(motorIntakeSub);
 
     stickLeft = new Joystick(Constants.stickPortL);
     stickRight = new Joystick(Constants.stickPortR);
@@ -48,8 +55,12 @@ public class RobotContainer {
   
 
     driveSub.setDefaultCommand(driveCmd);
-    gearPistonSub.setDefaultCommand(gearPistonCmd);
-    intakePistonSub.setDefaultCommand(intakePistonCmd);
+    
+    gearPistonSub.setDefaultCommand(pistonCmd);
+    intakePistonSub.setDefaultCommand(pistonCmd);
+    climbPistonSub.setDefaultCommand(pistonCmd);
+
+    motorIntakeSub.setDefaultCommand(intakeCmd);
     // Configure the button bindings
     configureButtonBindings();
 
