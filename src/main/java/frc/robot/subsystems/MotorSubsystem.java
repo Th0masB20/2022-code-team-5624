@@ -31,6 +31,20 @@ public class MotorSubsystem extends SubsystemBase {
   public void usePistonMotors(double speed) {
     climbMotor1.set(speed);
     climbMotor2.set(speed);
+
+  }
+
+  public void stopIntakeMotors(){
+    intakeMotor.set(0);
+  }
+
+  public void stopClimbMotors(){
+    climbMotor1.set(0);
+    climbMotor2.set(0);
+  }
+
+  public void stopBeltMotors(){
+    beltMotor.set(0);
   }
   @Override
   public void periodic() {

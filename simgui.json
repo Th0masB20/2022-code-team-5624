@@ -9,9 +9,12 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/ClimbPistonSubsystem": "Subsystem",
       "/LiveWindow/DriveSubsystem": "Subsystem",
+      "/LiveWindow/GearPistonSubsystem": "Subsystem",
       "/LiveWindow/GearboxPistonSubsystem": "Subsystem",
       "/LiveWindow/IntakePistonSubsystem": "Subsystem",
+      "/LiveWindow/MotorSubsystem": "Subsystem",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
     }
   }
