@@ -4,8 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
@@ -26,6 +28,8 @@ import frc.robot.subsystems.MotorSubsystem;
 public class RobotContainer {
   public static XboxController xboxController;
   public static Joystick stickLeft, stickRight;
+  Compressor compressor;
+
   DriveSubsystem driveSub;
   GearPistonSubsystem gearPistonSub;
   IntakePistonSubsystem intakePistonSub;
@@ -61,6 +65,9 @@ public class RobotContainer {
     climbPistonSub.setDefaultCommand(pistonCmd);
 
     motorIntakeSub.setDefaultCommand(intakeCmd);
+
+    compressor = new Compressor(PneumaticsModuleType.REVPH);
+    compressor.enableDigital();
     // Configure the button bindings
     configureButtonBindings();
 

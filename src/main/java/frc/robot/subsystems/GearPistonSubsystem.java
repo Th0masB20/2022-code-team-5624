@@ -16,7 +16,7 @@ public class GearPistonSubsystem extends SubsystemBase {
   long timer = 0;
   /** Creates a new GearboxPistonSubsystem. */
   public GearPistonSubsystem() {
-    solenoid1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.solenoidPort1,Constants.solenoidPort2);
+    solenoid1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.solenoidPort1,Constants.solenoidPort2);
   }
 
   public void useGearPistons(boolean activate) {

@@ -14,7 +14,13 @@ public class VisionSubsystem extends SubsystemBase {
   public VisionSubsystem() {
     limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
   }
-
+  public double getTx() {
+    return limelightTable.getEntry("tx").getDouble(0);
+  }
+  public double getTy() {
+    return limelightTable.getEntry("ty").getDouble(0);
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

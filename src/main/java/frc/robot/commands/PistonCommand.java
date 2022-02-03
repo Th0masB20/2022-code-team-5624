@@ -20,7 +20,7 @@ public class PistonCommand extends CommandBase {
     this.climbSub = climbSub;
     this.gearSub = gearSub;
     this.intakeSub = intakeSub;
-    // Use addRequirements() here to declare subsystem dependencies.
+    //Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.climbSub, this.gearSub, this.intakeSub);
   }
 

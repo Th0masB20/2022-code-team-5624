@@ -11,6 +11,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class AutonomousSubsystem extends SubsystemBase {
   WPI_TalonFX falcon1;
   WPI_TalonFX falcon2; 
+  VisionSubsystem vision;
+
+  double p = 0,i = 0,d = 0;
+  double kp, ki;
 
   /** Creates a new AutonomousSubsystem. */
   public AutonomousSubsystem() {
@@ -20,6 +24,11 @@ public class AutonomousSubsystem extends SubsystemBase {
     falcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
   }
 
+  private double pid(double error) {
+    i += error * 0.02f;
+    double value = kp*error + ki*i;
+    return value;
+  }
   public void measureDistance(){
 
   }

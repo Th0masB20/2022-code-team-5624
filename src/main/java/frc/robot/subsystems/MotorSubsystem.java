@@ -21,18 +21,30 @@ public class MotorSubsystem extends SubsystemBase {
   }
 
   public void useIntakeMotor(double speed) {
-    intakeMotor.set(speed);
+    if (speed<-0.2||speed>0.2) {
+      intakeMotor.set(speed);
+    } else {
+      stopIntakeMotors();
+    }
   }
 
   public void useBeltMotor(double speed) {
-    beltMotor.set(speed);
+    if (speed<-0.2||speed>0.2) {
+      beltMotor.set(speed);
+    } else {
+      stopBeltMotors();
+    }
   }
   
   public void usePistonMotors(double speed) {
-    climbMotor1.set(speed);
-    climbMotor2.set(speed);
-
+    if (speed<-0.2||speed>0.2) {
+      climbMotor1.set(speed);
+      climbMotor2.set(speed);
+    } else {
+      stopClimbMotors();;
+    }
   }
+
 
   public void stopIntakeMotors(){
     intakeMotor.set(0);
