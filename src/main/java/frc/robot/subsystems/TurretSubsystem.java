@@ -25,6 +25,8 @@ public class TurretSubsystem extends SubsystemBase {
   PID turretPID;
   PID shootPid;
   Timer timer = new Timer();
+  double radius = 0;
+  double convertionFactor = (double)(1/2048) * (2 * Math.PI * radius);
 
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
@@ -43,6 +45,7 @@ public class TurretSubsystem extends SubsystemBase {
   public void turnTurret() {
     rotateMotor.set(turretPID.calculatePid(vision.getTx()));
     if (vision.getTx()==0)
+
       timer.start();
     else 
     {
@@ -54,11 +57,12 @@ public class TurretSubsystem extends SubsystemBase {
   public void autonomousTurret () {
     turnTurret();
     if (timer.get() > 0.69) 
-      runTurret();
+      runTurret(vision.getDistance());
   }
 
-  public void runTurret() {
-    error = wantedSpeed - falcon1.getSelectedSensorVelocity();
+  public void runTurret(double distance) {
+    //wantedSpeed = ;
+    error = wantedSpeed - (falcon1.getSelectedSensorVelocity() * convertionFactor);
     falcon1.set(shootPid.calculatePid(error));
   }
 
