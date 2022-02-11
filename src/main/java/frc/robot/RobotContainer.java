@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.MotorCommand;
 import frc.robot.commands.PistonCommand;
@@ -18,6 +19,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.GearPistonSubsystem;
 import frc.robot.subsystems.IntakePistonSubsystem;
 import frc.robot.subsystems.MotorSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -35,10 +37,15 @@ public class RobotContainer {
   IntakePistonSubsystem intakePistonSub;
   ClimbPistonSubsystem climbPistonSub;
   MotorSubsystem motorIntakeSub;
+  TurretSubsystem turretSub;
 
   DriveCommand driveCmd;
   PistonCommand pistonCmd;
   MotorCommand intakeCmd;
+  AutonomousCommand autonomousCmd;
+
+
+
   // The robot's subsystems and commands are defined here...
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -47,10 +54,13 @@ public class RobotContainer {
     intakePistonSub = new IntakePistonSubsystem();
     climbPistonSub = new ClimbPistonSubsystem();
     motorIntakeSub = new MotorSubsystem();
+    turretSub = new TurretSubsystem();
+    
     ////////////////////////////////////////////////////////////
     driveCmd = new DriveCommand(driveSub);
     pistonCmd = new PistonCommand(climbPistonSub, gearPistonSub, intakePistonSub);
     intakeCmd = new MotorCommand(motorIntakeSub);
+    autonomousCmd = new AutonomousCommand(turretSub);
 
     stickLeft = new Joystick(Constants.stickPortL);
     stickRight = new Joystick(Constants.stickPortR);
@@ -63,6 +73,7 @@ public class RobotContainer {
     gearPistonSub.setDefaultCommand(pistonCmd);
     intakePistonSub.setDefaultCommand(pistonCmd);
     climbPistonSub.setDefaultCommand(pistonCmd);
+    turretSub.setDefaultCommand(autonomousCmd);
 
     motorIntakeSub.setDefaultCommand(intakeCmd);
 

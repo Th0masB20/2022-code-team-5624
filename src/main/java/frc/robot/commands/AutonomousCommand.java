@@ -12,6 +12,7 @@ public class AutonomousCommand extends CommandBase {
   /** Creates a new AutonomousCommand. */
   public AutonomousCommand(TurretSubsystem subTurret) {
     turretSub = subTurret;
+    addRequirements(subTurret);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

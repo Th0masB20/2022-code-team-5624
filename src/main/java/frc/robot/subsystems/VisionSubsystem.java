@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class VisionSubsystem extends SubsystemBase {
   NetworkTable limelightTable;
-  double cameraAngle;
+  double cameraAngle = 30;
+  double cameraHeight = 1.3;
   double height = 2.64;
   /** Creates a new VisionSubsystem. */
   public VisionSubsystem() {
@@ -23,7 +24,9 @@ public class VisionSubsystem extends SubsystemBase {
     return limelightTable.getEntry("ty").getDouble(0);
   }
 
-
+  public double getDistance() {
+    return (height-cameraHeight) / Math.tan(cameraAngle + getTy());
+  }
   
   @Override
   public void periodic() {
