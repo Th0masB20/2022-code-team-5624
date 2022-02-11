@@ -20,6 +20,7 @@ public class MotorSubsystem extends SubsystemBase {
     climbMotor2 = new VictorSP(Constants.pistonMotorPort2);
   }
 
+  //intake motor
   public void useIntakeMotor(double speed) {
     if (speed<-0.2||speed>0.2) {
       intakeMotor.set(speed);
@@ -28,6 +29,7 @@ public class MotorSubsystem extends SubsystemBase {
     }
   }
 
+  //belt motor
   public void useBeltMotor(double speed) {
     if (speed<-0.2||speed>0.2) {
       beltMotor.set(speed);
@@ -35,8 +37,9 @@ public class MotorSubsystem extends SubsystemBase {
       stopBeltMotors();
     }
   }
-  
-  public void usePistonMotors(double speed) {
+
+  //climb motor
+  public void useClimbMotors(double speed) {
     if (speed<-0.2||speed>0.2) {
       climbMotor1.set(speed);
       climbMotor2.set(speed);

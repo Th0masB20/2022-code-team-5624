@@ -26,7 +26,7 @@ public class MotorCommand extends CommandBase {
   public void execute() {
     motorSub.useBeltMotor(RobotContainer.xboxController.getLeftY());
     motorSub.useIntakeMotor(RobotContainer.xboxController.getRightTriggerAxis());
-    motorSub.usePistonMotors(RobotContainer.xboxController.getLeftX());
+    motorSub.useClimbMotors(RobotContainer.xboxController.getLeftX());
   }
 
   // Called once the command ends or is interrupted.

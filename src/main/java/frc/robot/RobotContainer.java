@@ -49,6 +49,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    //subsystems
     driveSub = new DriveSubsystem();
     gearPistonSub = new GearPistonSubsystem();
     intakePistonSub = new IntakePistonSubsystem();
@@ -56,33 +57,29 @@ public class RobotContainer {
     motorIntakeSub = new MotorSubsystem();
     turretSub = new TurretSubsystem();
     
-    ////////////////////////////////////////////////////////////
+    //command
     driveCmd = new DriveCommand(driveSub);
     pistonCmd = new PistonCommand(climbPistonSub, gearPistonSub, intakePistonSub);
     intakeCmd = new MotorCommand(motorIntakeSub);
     autonomousCmd = new AutonomousCommand(turretSub);
 
+    //controllers
     stickLeft = new Joystick(Constants.stickPortL);
     stickRight = new Joystick(Constants.stickPortR);
-    
     xboxController = new XboxController(Constants.xboxPort);
   
-
+    //defailt commands
     driveSub.setDefaultCommand(driveCmd);
-    
     gearPistonSub.setDefaultCommand(pistonCmd);
     intakePistonSub.setDefaultCommand(pistonCmd);
     climbPistonSub.setDefaultCommand(pistonCmd);
-    turretSub.setDefaultCommand(autonomousCmd);
-
     motorIntakeSub.setDefaultCommand(intakeCmd);
 
     compressor = new Compressor(PneumaticsModuleType.REVPH);
     compressor.enableDigital();
+
     // Configure the button bindings
     configureButtonBindings();
-
-
   }
 
   /**
@@ -100,6 +97,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return autonomousCmd;
   }
 }

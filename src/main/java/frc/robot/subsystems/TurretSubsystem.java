@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.PID;
 
 public class TurretSubsystem extends SubsystemBase {
-  //WPI_TalonFX falcon1;
-  //WPI_TalonFX falcon2; 
-  //WPI_TalonFX rotateMotor;
+  WPI_TalonFX falcon1;
+  WPI_TalonFX falcon2; 
+  WPI_TalonFX rotateMotor;
   VisionSubsystem vision;
 
   double kp = 0.1;
@@ -31,22 +31,22 @@ public class TurretSubsystem extends SubsystemBase {
 
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
-    //falcon1 = new WPI_TalonFX(1);
-    //falcon2 = new WPI_TalonFX(2);
-    //rotateMotor = new WPI_TalonFX(3);
+    falcon1 = new WPI_TalonFX(1);
+    falcon2 = new WPI_TalonFX(2);
+    rotateMotor = new WPI_TalonFX(3);
     shootPid = new PID(kp,ki,kd);
     turretPID = new PID(kp,ki);
-    //falcon2.follow(falcon1);
-    //falcon2.setInverted(true);
+    falcon2.follow(falcon1);
+    falcon2.setInverted(true);
 
     vision = new VisionSubsystem();
 
-    //falcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    //falcon2.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    falcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    falcon2.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
   }
 
   public void turnTurret() {
-    //rotateMotor.set(turretPID.calculatePid(vision.getTx()));
+    rotateMotor.set(turretPID.calculatePid(vision.getTx()));
     if (vision.getTx()==0)
 
       timer.start();
@@ -59,16 +59,18 @@ public class TurretSubsystem extends SubsystemBase {
 
   public void autonomousTurret () {
     turnTurret();
-    if (timer.get() > 0.69) 
+    if (timer.get() > 0.69){
       runTurret(vision.getDistance());
+    }
     
+    SmartDashboard.putNumber("getTy", vision.getTy());
     SmartDashboard.putNumber("distance", vision.getDistance());
   }
 
   public void runTurret(double distance) {
     //wantedSpeed =;
-    //error = wantedSpeed - (falcon1.getSelectedSensorVelocity() * convertionFactor);
-    //falcon1.set(shootPid.calculatePid(error));
+    error = wantedSpeed - (falcon1.getSelectedSensorVelocity() * convertionFactor);
+    falcon1.set(shootPid.calculatePid(error));
   }
 
   @Override

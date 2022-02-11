@@ -26,7 +26,8 @@
       "/LiveWindow/IntakePistonSubsystem": "Subsystem",
       "/LiveWindow/MotorSubsystem": "Subsystem",
       "/LiveWindow/TurretSubsystem": "Subsystem",
-      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/VisionSubsystem": "Subsystem"
     }
   }
 }
