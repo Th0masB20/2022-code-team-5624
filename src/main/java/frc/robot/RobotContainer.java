@@ -66,10 +66,14 @@ public class RobotContainer {
     configureButtonBindings();
 
     
-    private final Command mainAuto = new AutonomousCommand(driveSub);
+    private final Command centerAuto = new AutonomousCommandCenter(driveSub, motorIntakeSub);
+    private final Command leftAuto new AutonomousCommandLeft(driveSub, motorIntakeSub);
+    private final Command rightAuto = new AutonomousCommandRight(driveSub, motorIntakeSub);
 
     SendableChooser<Command> auto_chooser = new SendableChooser<>();
-    auto_chooser.setDefaultOption("Main Autonomous", mainAuto);
+    auto_chooser.setDefaultOption("Center Autonomous", centerAuto);
+    auto_chooser.addOption("Left Autonomous", leftAuto);
+    auto_chooser.addOption("Right Autonomous", rightAuto);
 
     SmartDashboard.putData(auto_chooser);
 
