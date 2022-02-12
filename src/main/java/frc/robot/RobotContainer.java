@@ -61,9 +61,17 @@ public class RobotContainer {
     climbPistonSub.setDefaultCommand(pistonCmd);
 
     motorIntakeSub.setDefaultCommand(intakeCmd);
+
     // Configure the button bindings
     configureButtonBindings();
 
+    
+    private final Command mainAuto = new AutonomousCommand(driveSub);
+
+    SendableChooser<Command> auto_chooser = new SendableChooser<>();
+    auto_chooser.setDefaultOption("Main Autonomous", mainAuto);
+
+    SmartDashboard.putData(auto_chooser);
 
   }
 
@@ -81,7 +89,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return null;
+    return auto_chooser.getSelected();
   }
 }

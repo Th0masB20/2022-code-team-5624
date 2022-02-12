@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
+
   private VictorSP motorR1;
   private VictorSP motorR2;
   private VictorSP motorR3;
@@ -19,8 +20,10 @@ public class DriveSubsystem extends SubsystemBase {
   
   private MotorControllerGroup rightGroup;
   private MotorControllerGroup leftGroup;
+
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
+
     motorR1 = new VictorSP(Constants.vPortR1);
     motorR2 = new VictorSP(Constants.vPortR2);
     motorR3 = new VictorSP(Constants.vPortR3);
@@ -30,6 +33,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     rightGroup = new MotorControllerGroup(motorR1, motorR2, motorR3);
     leftGroup = new MotorControllerGroup(motorL1, motorL2, motorL3);
+    
   }
 
   public void drive(double leftY, double rightY) {

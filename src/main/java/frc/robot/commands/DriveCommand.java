@@ -9,7 +9,9 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class DriveCommand extends CommandBase {
+
   DriveSubsystem driveSub;
+  
   /** Creates a new DriveCommand. */
   public DriveCommand(DriveSubsystem drive) {
     driveSub = drive;

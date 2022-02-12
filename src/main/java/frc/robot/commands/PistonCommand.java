@@ -12,16 +12,21 @@ import frc.robot.subsystems.GearPistonSubsystem;
 import frc.robot.subsystems.IntakePistonSubsystem;
 
 public class PistonCommand extends CommandBase {
+
   ClimbPistonSubsystem climbSub;
   GearPistonSubsystem gearSub;
   IntakePistonSubsystem intakeSub;
+
   /** Creates a new PistonCommand. */
   public PistonCommand(ClimbPistonSubsystem climbSub, GearPistonSubsystem gearSub, IntakePistonSubsystem intakeSub) {
+
     this.climbSub = climbSub;
     this.gearSub = gearSub;
     this.intakeSub = intakeSub;
+    
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.climbSub, this.gearSub, this.intakeSub);
+
   }
 
   // Called when the command is initially scheduled.
