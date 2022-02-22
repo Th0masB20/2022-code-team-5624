@@ -46,7 +46,11 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void turnTurret() {
-    rotateMotor.set(turretPID.calculatePid(vision.getTx()));
+    if (vision.getTx()!=0||vision.getTy()!=0){
+      rotateMotor.set(turretPID.calculatePid(vision.getTx()));
+    } else {
+      turretStop();
+    }
     if (vision.getTx()==0)
 
       timer.start();
@@ -59,14 +63,19 @@ public class TurretSubsystem extends SubsystemBase {
 
   public void autonomousTurret () {
     turnTurret();
-    if (timer.get() > 0.69){
+      if (timer.get() > 0.69){
       runTurret(vision.getDistance());
     }
     
-    SmartDashboard.putNumber("getTy", vision.getTy());
-    SmartDashboard.putNumber("distance", vision.getDistance());
+    SmartDashboard.putNumber("speed",turretPID.calculatePid(vision.getTx()) );
   }
 
+  public void manualTurret(double turn){
+    rotateMotor.set(turn);
+  }
+  public void turretStop() {
+    rotateMotor.set(0);
+  }
   public void runTurret(double distance) {
     //wantedSpeed =;
     error = wantedSpeed - (falcon1.getSelectedSensorVelocity() * convertionFactor);

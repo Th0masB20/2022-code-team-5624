@@ -60,7 +60,7 @@ public class RobotContainer {
     //command
     driveCmd = new DriveCommand(driveSub);
     pistonCmd = new PistonCommand(climbPistonSub, gearPistonSub, intakePistonSub);
-    intakeCmd = new MotorCommand(motorIntakeSub);
+    intakeCmd = new MotorCommand(motorIntakeSub, turretSub);
     autonomousCmd = new AutonomousCommand(turretSub);
 
     //controllers

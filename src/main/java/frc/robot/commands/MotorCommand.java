@@ -7,12 +7,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.MotorSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 
 public class MotorCommand extends CommandBase {
   MotorSubsystem motorSub;
+  TurretSubsystem turretSub;
   /** Creates a new IntakeBeltCommand. */
-  public MotorCommand(MotorSubsystem motorSub) {
+
+  public MotorCommand(MotorSubsystem motorSub,TurretSubsystem turretSub) {
     this.motorSub = motorSub;
+    this.turretSub = turretSub;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.motorSub);
   }
@@ -27,6 +31,7 @@ public class MotorCommand extends CommandBase {
     motorSub.useBeltMotor(RobotContainer.xboxController.getLeftY());
     motorSub.useIntakeMotor(RobotContainer.xboxController.getRightTriggerAxis());
     motorSub.useClimbMotors(RobotContainer.xboxController.getLeftX());
+    turretSub.manualTurret(RobotContainer.xboxController.getPOV()); // change later
   }
 
   // Called once the command ends or is interrupted.
