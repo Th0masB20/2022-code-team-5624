@@ -51,17 +51,17 @@ public class RobotContainer {
   public RobotContainer() {
     //subsystems
     driveSub = new DriveSubsystem();
-    gearPistonSub = new GearPistonSubsystem();
-    intakePistonSub = new IntakePistonSubsystem();
-    climbPistonSub = new ClimbPistonSubsystem();
-    motorIntakeSub = new MotorSubsystem();
-    turretSub = new TurretSubsystem();
+    //gearPistonSub = new GearPistonSubsystem();
+    //intakePistonSub = new IntakePistonSubsystem();
+    //climbPistonSub = new ClimbPistonSubsystem();
+    //motorIntakeSub = new MotorSubsystem();
+    //turretSub = new TurretSubsystem();
     
     //command
     driveCmd = new DriveCommand(driveSub);
-    pistonCmd = new PistonCommand(climbPistonSub, gearPistonSub, intakePistonSub);
-    intakeCmd = new MotorCommand(motorIntakeSub, turretSub);
-    autonomousCmd = new AutonomousCommand(turretSub);
+    //pistonCmd = new PistonCommand(climbPistonSub, gearPistonSub, intakePistonSub);
+    //intakeCmd = new MotorCommand(motorIntakeSub, turretSub);
+    autonomousCmd = new AutonomousCommand(driveSub);
 
     //controllers
     stickLeft = new Joystick(Constants.stickPortL);
@@ -70,13 +70,13 @@ public class RobotContainer {
   
     //defailt commands
     driveSub.setDefaultCommand(driveCmd);
-    gearPistonSub.setDefaultCommand(pistonCmd);
-    intakePistonSub.setDefaultCommand(pistonCmd);
-    climbPistonSub.setDefaultCommand(pistonCmd);
-    motorIntakeSub.setDefaultCommand(intakeCmd);
+    // gearPistonSub.setDefaultCommand(pistonCmd);
+    // intakePistonSub.setDefaultCommand(pistonCmd);
+    // climbPistonSub.setDefaultCommand(pistonCmd);
+    // motorIntakeSub.setDefaultCommand(intakeCmd);
 
-    compressor = new Compressor(PneumaticsModuleType.REVPH);
-    compressor.enableDigital();
+    //compressor = new Compressor(PneumaticsModuleType.REVPH);
+    //compressor.enableDigital();
 
     // Configure the button bindings
     configureButtonBindings();

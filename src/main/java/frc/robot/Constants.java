@@ -23,9 +23,10 @@ public final class Constants {
 
     public static final int vPortR1 = 0;
     public static final int vPortR2 = 1;
-    public static final int vPortR3 = 2;
+    //public static final int vPortR3 = 2;
     public static final int vPortL1 = 3;
     public static final int vPortL2 = 4;
+
     public static final int vPortL3 = 5;
 
     public static final int stickPortL = 0;
@@ -52,4 +53,8 @@ public final class Constants {
     public static final int beltMotorPort = 7;
     public static final int pistonMotorPort1 = 8;
     public static final int pistonMotorPort2 = 9;
+
+    public static final int shootPort1 = 0;
+    public static final int shootPort2 = 1;
+    public static final int turretRotatePort = 2;
 }

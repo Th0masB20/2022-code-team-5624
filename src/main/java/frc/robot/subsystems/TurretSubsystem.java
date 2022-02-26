@@ -8,14 +8,17 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.PID;
 
 public class TurretSubsystem extends SubsystemBase {
-  WPI_TalonFX falcon1;
-  WPI_TalonFX falcon2; 
-  WPI_TalonFX rotateMotor;
+  
+  VictorSP shootMotor1;
+  VictorSP shootMotor2; 
+  VictorSP rotateMotor;
   VisionSubsystem vision;
 
   double kp = 0.1;
@@ -31,18 +34,13 @@ public class TurretSubsystem extends SubsystemBase {
 
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
-    falcon1 = new WPI_TalonFX(1);
-    falcon2 = new WPI_TalonFX(2);
-    rotateMotor = new WPI_TalonFX(3);
+    shootMotor1 = new VictorSP(Constants.shootPort1);
+    shootMotor2 = new VictorSP(Constants.shootPort2);
+    rotateMotor = new VictorSP(Constants.turretRotatePort);;
     shootPid = new PID(kp,ki,kd);
     turretPID = new PID(kp,ki);
-    falcon2.follow(falcon1);
-    falcon2.setInverted(true);
 
     vision = new VisionSubsystem();
-
-    falcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    falcon2.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
   }
 
   public void turnTurret() {
@@ -78,8 +76,8 @@ public class TurretSubsystem extends SubsystemBase {
   }
   public void runTurret(double distance) {
     //wantedSpeed =;
-    error = wantedSpeed - (falcon1.getSelectedSensorVelocity() * convertionFactor);
-    falcon1.set(shootPid.calculatePid(error));
+    error = wantedSpeed - (/*encoder velocity*/  convertionFactor);
+    shootMotor1.set(shootPid.calculatePid(error)); 
   }
 
   @Override
