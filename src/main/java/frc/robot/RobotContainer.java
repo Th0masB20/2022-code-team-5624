@@ -52,20 +52,20 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     //subsystems
-    driveSub = new DriveSubsystem();
+    //driveSub = new DriveSubsystem();
     //gearPistonSub = new GearPistonSubsystem();
     //intakePistonSub = new IntakePistonSubsystem();
     //climbPistonSub = new ClimbPistonSubsystem();
     //motorIntakeSub = new MotorSubsystem();
-    //turretSub = new TurretSubsystem();
-    //autoSub = new AutonomousSubsystem(turretSub, driveSub);
+    turretSub = new TurretSubsystem();
+    autoSub = new AutonomousSubsystem(turretSub /*driveSub*/);
     
     //command
-    driveCmd = new DriveCommand(driveSub);
+    //driveCmd = new DriveCommand(driveSub);
     //pistonCmd = new PistonCommand(climbPistonSub, gearPistonSub, intakePistonSub);
     //intakeCmd = new MotorCommand(motorIntakeSub, turretSub);
 
-    autonomousCmd = new AutonomousCommand(driveSub/*autoSub*/); // this needs autosub
+    autonomousCmd = new AutonomousCommand(/*driveSub*/autoSub); // this needs autosub
 
     //controllers
     stickLeft = new Joystick(Constants.stickPortL);
@@ -73,7 +73,7 @@ public class RobotContainer {
     xboxController = new XboxController(Constants.xboxPort);
   
     //defailt commands
-    driveSub.setDefaultCommand(driveCmd);
+    //driveSub.setDefaultCommand(driveCmd);
     // gearPistonSub.setDefaultCommand(pistonCmd);
     // intakePistonSub.setDefaultCommand(pistonCmd);
     // climbPistonSub.setDefaultCommand(pistonCmd);

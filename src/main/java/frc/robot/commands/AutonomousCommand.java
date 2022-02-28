@@ -14,9 +14,9 @@ public class AutonomousCommand extends CommandBase {
   DriveSubsystem driveSub;
 
   /** Creates a new AutonomousCommand. */
-  public AutonomousCommand(/*AutonomousSubsystem autoSub*/ DriveSubsystem driveSub) {
-    //this.autoSub = autoSub;
-    this.driveSub = driveSub;
+  public AutonomousCommand(AutonomousSubsystem autoSub/* DriveSubsystem driveSub*/) {
+    this.autoSub = autoSub;
+    //this.driveSub = driveSub;
     //addRequirements(autoSub);
   }
 
@@ -30,7 +30,8 @@ public class AutonomousCommand extends CommandBase {
   @Override
   public void execute() {
     //autoSub.runAutonomous();
-    driveSub.driveStraight(0.3, 0);
+    //driveSub.driveStraight(0.3, 0);
+    autoSub.testTurret();
   }
 
   // Called once the command ends or is interrupted.

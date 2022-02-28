@@ -12,16 +12,16 @@ import frc.robot.Constants;
 
 public class VisionSubsystem extends SubsystemBase {
   NetworkTable limelightTable;
-  double cameraAngle = 22.0;//30; //degress 
-  double cameraHeight = (double)25/12; //0.4064; //m
-  double height = (double)38.25/12; //2.64; //m
-  Ultrasonic ultraSensor;
+  double cameraAngle = 30; //degress 
+  double cameraHeight = 1.1666; //feet
+  double hubHeight = 8.6666; //m
+  //Ultrasonic ultraSensor;
 
   /** Creates a new VisionSubsystem. */
   public VisionSubsystem() {
     limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
-    ultraSensor = new Ultrasonic(Constants.sonicDIO1, Constants.sonicDIO2);
-    ultraSensor.setAutomaticMode(true);
+    //ultraSensor = new Ultrasonic(Constants.sonicDIO1, Constants.sonicDIO2);
+    //ultraSensor.setAutomaticMode(true);
   }
   public double getTx() {
     return limelightTable.getEntry("tx").getDouble(0.0);
@@ -31,10 +31,11 @@ public class VisionSubsystem extends SubsystemBase {
   }
 
   public double getDistance() {
-    return (height-cameraHeight) / Math.tan(Math.toRadians(cameraAngle + getTy()));
+    return (hubHeight-cameraHeight) / Math.tan(Math.toRadians(cameraAngle + getTy()));
   }
-
+/*
   public boolean collectedBall(){
     return (ultraSensor.getRangeInches() < 10);
   }
+  */
 }

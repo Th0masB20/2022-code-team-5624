@@ -4,11 +4,19 @@
 
 package frc.robot.subsystems;
 
+import java.nio.channels.ShutdownChannelGroupException;
+
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.PID;
+
 
 public class TurretSubsystem extends SubsystemBase {
   
@@ -52,10 +60,11 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void autonomousTurret () {
-    turnTurret();
+    /*turnTurret();
       if (timer.get() > 0.69){
         shootBall(vision.getDistance());
-    }
+    }*/
+    shootBall(vision.getDistance());
   }
 
   public void manualTurret(double turn){
@@ -67,9 +76,11 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void shootBall(double distance) {
-    //wantedSpeed =;
+    wantedSpeed = -0.3;
     shootMotor1.set(wantedSpeed); 
-    shootMotor2.set(wantedSpeed);
+    shootMotor2.set(wantedSpeed - 0.2);
+    SmartDashboard.putNumber("distance", vision.getDistance());
+    SmartDashboard.putNumber("wanted speed", wantedSpeed);
   }
 
   @Override
