@@ -6,16 +6,22 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class VisionSubsystem extends SubsystemBase {
   NetworkTable limelightTable;
   double cameraAngle = 22.0;//30; //degress 
   double cameraHeight = (double)25/12; //0.4064; //m
   double height = (double)38.25/12; //2.64; //m
+  Ultrasonic ultraSensor;
+
   /** Creates a new VisionSubsystem. */
   public VisionSubsystem() {
     limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+    ultraSensor = new Ultrasonic(Constants.sonicDIO1, Constants.sonicDIO2);
+    ultraSensor.setAutomaticMode(true);
   }
   public double getTx() {
     return limelightTable.getEntry("tx").getDouble(0.0);
@@ -27,9 +33,8 @@ public class VisionSubsystem extends SubsystemBase {
   public double getDistance() {
     return (height-cameraHeight) / Math.tan(Math.toRadians(cameraAngle + getTy()));
   }
-  
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+
+  public boolean collectedBall(){
+    return (ultraSensor.getRangeInches() < 10);
   }
 }

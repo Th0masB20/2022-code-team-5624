@@ -48,7 +48,6 @@ public class MotorSubsystem extends SubsystemBase {
     }
   }
 
-
   public void stopIntakeMotors(){
     intakeMotor.set(0);
   }
@@ -60,9 +59,5 @@ public class MotorSubsystem extends SubsystemBase {
 
   public void stopBeltMotors(){
     beltMotor.set(0);
-  }
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
   }
 }

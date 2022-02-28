@@ -5,29 +5,32 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.AutonomousSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
 
 public class AutonomousCommand extends CommandBase {
-  TurretSubsystem turretSub;
+
+  AutonomousSubsystem autoSub;
   DriveSubsystem driveSub;
+
   /** Creates a new AutonomousCommand. */
-  public AutonomousCommand(/*TurretSubsystem subTurret,*/ DriveSubsystem driveSub) {
-    //turretSub = subTurret;
+  public AutonomousCommand(/*AutonomousSubsystem autoSub*/ DriveSubsystem driveSub) {
+    //this.autoSub = autoSub;
     this.driveSub = driveSub;
-    addRequirements(/*subTurret*/ driveSub);
-    // Use addRequirements() here to declare subsystem dependencies.
+    //addRequirements(autoSub);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    //autoSub.start();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //turretSub.autonomousTurret();
-    driveSub.driveStraight(0.05);
+    //autoSub.runAutonomous();
+    driveSub.driveStraight(0.3, 0);
   }
 
   // Called once the command ends or is interrupted.

@@ -38,9 +38,4 @@ public class ClimbPistonSubsystem extends SubsystemBase {
     long cooldownTime = System.currentTimeMillis() - startTime;
     return (cooldownTime > 250);
   }
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
 }

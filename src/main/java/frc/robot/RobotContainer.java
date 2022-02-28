@@ -14,6 +14,7 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.MotorCommand;
 import frc.robot.commands.PistonCommand;
+import frc.robot.subsystems.AutonomousSubsystem;
 import frc.robot.subsystems.ClimbPistonSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.GearPistonSubsystem;
@@ -38,6 +39,7 @@ public class RobotContainer {
   ClimbPistonSubsystem climbPistonSub;
   MotorSubsystem motorIntakeSub;
   TurretSubsystem turretSub;
+  AutonomousSubsystem autoSub;
 
   DriveCommand driveCmd;
   PistonCommand pistonCmd;
@@ -56,12 +58,14 @@ public class RobotContainer {
     //climbPistonSub = new ClimbPistonSubsystem();
     //motorIntakeSub = new MotorSubsystem();
     //turretSub = new TurretSubsystem();
+    //autoSub = new AutonomousSubsystem(turretSub, driveSub);
     
     //command
     driveCmd = new DriveCommand(driveSub);
     //pistonCmd = new PistonCommand(climbPistonSub, gearPistonSub, intakePistonSub);
     //intakeCmd = new MotorCommand(motorIntakeSub, turretSub);
-    autonomousCmd = new AutonomousCommand(driveSub);
+
+    autonomousCmd = new AutonomousCommand(driveSub/*autoSub*/); // this needs autosub
 
     //controllers
     stickLeft = new Joystick(Constants.stickPortL);

@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -13,38 +16,36 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    //chassi motor ports
+    public static final int vPortR1 = 0;
+    public static final int vPortR2 = 1;
+    public static final int vPortL1 = 2;
+    public static final int vPortL2 = 3;
+
+    //shooter motor ports
     public static final int shooterMotor1 = 0;
     public static final int shooterMotor2 = 1;
 
-    public static final int encoderLportA = 0;
-    public static final int encoderLportB = 1;
-    public static final int encoderRportA = 2;
-    public static final int encoderRportB = 3;
-
-    public static final int vPortR1 = 0;
-    public static final int vPortR2 = 1;
-    //public static final int vPortR3 = 2;
-    public static final int vPortL1 = 3;
-    public static final int vPortL2 = 4;
-
-    public static final int vPortL3 = 5;
-
+    //joystick ports
     public static final int stickPortL = 0;
     public static final int stickPortR = 1;
     
+    //xbox
     public static final int xboxPort = 3;
 
+    //change gear pistons
     public static final int solenoidPort1 = 0;
     public static final int solenoidPort2 = 1;
-    public static final int solenoidPort3 = 2;
-    public static final int solenoidPort4 = 3;
 
+    //lower intake pistons
     public static final int intakeSolonoidPort1 = 4;
     public static final int intakeSolonoidPort2 = 5;
 
+    //climb pistons
     public static final int climbSolenoidPort1 = 6;
     public static final int climbSolenoidPort2 = 7;
 
+    //button numbers on xbox
     public static final int gearAxis = 0;
     public static final int intakeAxis = 1;
     public static final int climbAxis = 2;
@@ -57,4 +58,7 @@ public final class Constants {
     public static final int shootPort1 = 0;
     public static final int shootPort2 = 1;
     public static final int turretRotatePort = 2;
+
+    public static final int sonicDIO1 = 1;
+    public static final int sonicDIO2 = 2;
 }
