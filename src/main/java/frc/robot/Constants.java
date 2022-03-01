@@ -22,10 +22,6 @@ public final class Constants {
     public static final int vPortL1 = 2;
     public static final int vPortL2 = 3;
 
-    //shooter motor ports
-    public static final int shooterMotor1 = 0;
-    public static final int shooterMotor2 = 1;
-
     //joystick ports
     public static final int stickPortL = 0;
     public static final int stickPortR = 1;
