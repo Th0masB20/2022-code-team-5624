@@ -19,15 +19,15 @@ public class AutonomousSubsystem extends SubsystemBase {
   boolean reset = false;
   
   /** Creates a new AutonomousSubsystem. */
-  public AutonomousSubsystem(TurretSubsystem tSub /*DriveSubsystem dSub*/) {
+  public AutonomousSubsystem(TurretSubsystem tSub, DriveSubsystem dSub) {
     turretSub = tSub;
-    //driveSub = dSub;
+    driveSub = dSub;
     visionSub = new VisionSubsystem();
     timer = new Timer();
   }
 
   public void runAutonomous(){
-    //turretSub.autonomousTurret();
+    turretSub.autonomousTurret();
     if(timer.get() < driveFor){
       driveSub.driveStraight(0.05,0);
     }
@@ -35,6 +35,12 @@ public class AutonomousSubsystem extends SubsystemBase {
     if(timer.get() > driveFor && timer.get() < stopFor){
       driveSub.stop();
     }
+    else{
+      turretSub.autonomousTurret();
+    }
+
+    
+    /**
     else {
       startRotation = true;
     }
@@ -42,14 +48,14 @@ public class AutonomousSubsystem extends SubsystemBase {
       driveSub.rotateUsingCamera(speed, visionSub.getTx());
     }
 
-    if(driveSub.facingTarget(visionSub.getTx()) /*&& !visionSub.collectedBall()*/){
+    if(driveSub.facingTarget(visionSub.getTx()) && !visionSub.collectedBall()){
       if(!reset){
         driveSub.resetGyro();
         reset = true;
       }
       driveSub.driveStraight(0.05,0);
     }
-/*
+    
     if(visionSub.collectedBall()){
       turretSub.autonomousTurret();
     }

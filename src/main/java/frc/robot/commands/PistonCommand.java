@@ -16,12 +16,12 @@ public class PistonCommand extends CommandBase {
   GearPistonSubsystem gearSub;
   IntakePistonSubsystem intakeSub;
   /** Creates a new PistonCommand. */
-  public PistonCommand(ClimbPistonSubsystem climbSub, GearPistonSubsystem gearSub, IntakePistonSubsystem intakeSub) {
-    this.climbSub = climbSub;
+  public PistonCommand(/*ClimbPistonSubsystem climbSub*/ GearPistonSubsystem gearSub, IntakePistonSubsystem intakeSub) {
+    //this.climbSub = climbSub;
     this.gearSub = gearSub;
     this.intakeSub = intakeSub;
     //Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(this.climbSub, this.gearSub, this.intakeSub);
+    addRequirements(/*this.climbSub*/this.gearSub, this.intakeSub);
   }
 
   // Called when the command is initially scheduled.
@@ -31,9 +31,11 @@ public class PistonCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    /*
     climbSub.useClimbPistons(RobotContainer.xboxController.getRawButton(Constants.climbAxis));
     gearSub.useGearPistons(RobotContainer.xboxController.getRawButton(Constants.gearAxis));
-    intakeSub.useIntakePistons(RobotContainer.xboxController.getRawButton(Constants.intakeAxis));
+    */
+    intakeSub.useIntakePistons(RobotContainer.xboxController.getAButton());
   }
 
   // Called once the command ends or is interrupted.

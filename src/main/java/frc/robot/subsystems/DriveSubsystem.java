@@ -55,8 +55,8 @@ public class DriveSubsystem extends SubsystemBase {
     motorL2 = new VictorSP(Constants.vPortL2);
     motorL3 = new VictorSP(Constants.vPortL3);
     
-    rightGroup = new MotorControllerGroup(motorR1, motorR2, motorR3);
-    leftGroup = new MotorControllerGroup(motorL1, motorL2, motorL3);
+    rightGroup = new MotorControllerGroup(motorR1, motorR2);
+    leftGroup = new MotorControllerGroup(motorL1, motorL2);
 
     gyro = new AHRS(SPI.Port.kMXP);
     rotatePid = new PID(kp, ki);
@@ -67,8 +67,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void drive(double leftY, double rightY) 
   {
-    rightGroup.set(-rightY);
-    leftGroup.set(leftY);
+    rightGroup.set(-rightY * 0.75f);
+    motorR3.set(rightY * 0.75f);
+    leftGroup.set(leftY * 0.75f);
+    motorL3.set(-leftY * 0.75f);
   }
 
   public void driveStraight(double speed, double target)

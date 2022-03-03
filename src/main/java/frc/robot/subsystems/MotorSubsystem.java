@@ -21,10 +21,18 @@ public class MotorSubsystem extends SubsystemBase {
   }
 
   //intake motor
-  public void useIntakeMotor(double speed) {
-    if (speed<-0.2||speed>0.2) {
-      intakeMotor.set(speed);
-    } else {
+  public void useIntakeMotor(double outSpeed, double inSpeed) {
+    if(outSpeed > 0){
+      intakeMotor.set(outSpeed);
+    }
+    else {
+      stopIntakeMotors();
+    }
+
+    if(inSpeed > 0){
+      intakeMotor.set(inSpeed);
+    }
+    else {
       stopIntakeMotors();
     }
   }

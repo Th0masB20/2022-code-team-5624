@@ -28,10 +28,14 @@ public class MotorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    motorSub.useBeltMotor(RobotContainer.xboxController.getLeftY());
-    motorSub.useIntakeMotor(RobotContainer.xboxController.getRightTriggerAxis());
-    motorSub.useClimbMotors(RobotContainer.xboxController.getLeftX());
-    turretSub.manualTurret(RobotContainer.xboxController.getPOV()); // change later
+    //motorSub.useBeltMotor(RobotContainer.xboxController.getLeftY());
+    //motorSub.useClimbMotors(RobotContainer.xboxController.getLeftX());
+
+    motorSub.useIntakeMotor(RobotContainer.xboxController.getLeftTriggerAxis(), RobotContainer.xboxController.getRightTriggerAxis());
+    turretSub.manualTurret(RobotContainer.xboxController.getLeftX()); // change later
+    if(RobotContainer.xboxController.getStartButton()){
+      turretSub.autonomousTurret();
+    }
   }
 
   // Called once the command ends or is interrupted.

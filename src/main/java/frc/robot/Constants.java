@@ -18,16 +18,19 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 public final class Constants {
     //chassi motor ports
     public static final int vPortR1 = 0;
-    public static final int vPortR2 = 1;
-    public static final int vPortL1 = 2;
-    public static final int vPortL2 = 3;
+    public static final int vPortR2 = 2;
+    public static final int vPortR3 = 1;
+
+    public static final int vPortL1 = 3;
+    public static final int vPortL2 = 5;
+    public static final int vPortL3 = 4;
 
     //joystick ports
-    public static final int stickPortL = 0;
-    public static final int stickPortR = 1;
+    public static final int stickPortL = 1;
+    public static final int stickPortR = 2;
     
     //xbox
-    public static final int xboxPort = 3;
+    public static final int xboxPort = 0;
 
     //change gear pistons
     public static final int solenoidPort1 = 0;
@@ -41,19 +44,14 @@ public final class Constants {
     public static final int climbSolenoidPort1 = 6;
     public static final int climbSolenoidPort2 = 7;
 
-    //button numbers on xbox
-    public static final int gearAxis = 0;
-    public static final int intakeAxis = 1;
-    public static final int climbAxis = 2;
-
     public static final int intakeMotorPort = 6;
     public static final int beltMotorPort = 7;
     public static final int pistonMotorPort1 = 8;
     public static final int pistonMotorPort2 = 9;
 
-    public static final int shootPort1 = 0;
-    public static final int shootPort2 = 1;
-    public static final int turretRotatePort = 2;
+    public static final int shootPort1 = 8;
+    public static final int shootPort2 = 9;
+    public static final int turretRotatePort = 7;
 
     public static final int sonicDIO1 = 1;
     public static final int sonicDIO2 = 2;

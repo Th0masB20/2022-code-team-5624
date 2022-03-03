@@ -11,25 +11,23 @@ import frc.robot.subsystems.DriveSubsystem;
 public class AutonomousCommand extends CommandBase {
 
   AutonomousSubsystem autoSub;
-  DriveSubsystem driveSub;
 
   /** Creates a new AutonomousCommand. */
-  public AutonomousCommand(AutonomousSubsystem autoSub/* DriveSubsystem driveSub*/) {
+  public AutonomousCommand(AutonomousSubsystem autoSub) {
     this.autoSub = autoSub;
-    //this.driveSub = driveSub;
-    //addRequirements(autoSub);
+    addRequirements(autoSub);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //autoSub.start();
+    autoSub.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //autoSub.runAutonomous();
+    autoSub.runAutonomous();
     //driveSub.driveStraight(0.3, 0);
     autoSub.testTurret();
   }

@@ -20,8 +20,8 @@ import frc.robot.PID;
 
 public class TurretSubsystem extends SubsystemBase {
   
-  VictorSP shootMotor1;
-  VictorSP shootMotor2; 
+  WPI_TalonFX shootMotor1;
+  WPI_TalonFX shootMotor2; 
   VictorSP rotateMotor;
   VisionSubsystem vision;
 
@@ -35,8 +35,8 @@ public class TurretSubsystem extends SubsystemBase {
 
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
-    shootMotor1 = new VictorSP(Constants.shootPort1);
-    shootMotor2 = new VictorSP(Constants.shootPort2);
+    shootMotor1 = new WPI_TalonFX(Constants.shootPort1);
+    shootMotor2 = new WPI_TalonFX(Constants.shootPort2);
     rotateMotor = new VictorSP(Constants.turretRotatePort);;
 
     vision = new VisionSubsystem();
@@ -60,15 +60,15 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void autonomousTurret () {
-    /*turnTurret();
+    turnTurret();
       if (timer.get() > 0.69){
         shootBall(vision.getDistance());
-    }*/
+    }
     shootBall(vision.getDistance());
   }
 
   public void manualTurret(double turn){
-    rotateMotor.set(turn);
+    rotateMotor.set(turn * 0.3);
   }
 
   public void turretStop() {

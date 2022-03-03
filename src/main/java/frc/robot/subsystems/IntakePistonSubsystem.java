@@ -16,7 +16,7 @@ public class IntakePistonSubsystem extends SubsystemBase {
   long timer = 0;
   /** Creates a new IntakePistonSubsystem. */
   public IntakePistonSubsystem() {
-    intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,Constants.intakeSolonoidPort1, Constants.intakeSolonoidPort2);
+    intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH,Constants.intakeSolonoidPort1, Constants.intakeSolonoidPort2);
   
   }
   public void useIntakePistons (boolean active) {

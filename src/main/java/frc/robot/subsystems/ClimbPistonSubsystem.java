@@ -17,7 +17,7 @@ public class ClimbPistonSubsystem extends SubsystemBase {
   long timer = 0;
   /** Creates a new PistonSubsystem. */
   public ClimbPistonSubsystem() {
-    climbSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.climbSolenoidPort1,Constants.climbSolenoidPort2);
+    climbSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.climbSolenoidPort1,Constants.climbSolenoidPort2);
   }
   
   public void useClimbPistons(boolean activate) {
