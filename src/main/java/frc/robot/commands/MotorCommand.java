@@ -12,6 +12,8 @@ import frc.robot.subsystems.TurretSubsystem;
 public class MotorCommand extends CommandBase {
   MotorSubsystem motorSub;
   TurretSubsystem turretSub;
+  boolean start = false;
+
   /** Creates a new IntakeBeltCommand. */
 
   public MotorCommand(MotorSubsystem motorSub,TurretSubsystem turretSub) {
@@ -29,12 +31,23 @@ public class MotorCommand extends CommandBase {
   @Override
   public void execute() {
     //motorSub.useBeltMotor(RobotContainer.xboxController.getLeftY());
-    //motorSub.useClimbMotors(RobotContainer.xboxController.getLeftX());
+    motorSub.useClimbMotors(RobotContainer.xboxController.getLeftX());
 
     motorSub.useIntakeMotor(RobotContainer.xboxController.getLeftTriggerAxis(), RobotContainer.xboxController.getRightTriggerAxis());
-    turretSub.manualTurret(RobotContainer.xboxController.getLeftX()); // change later
+    //turretSub.manualTurret(RobotContainer.xboxController.getLeftX()); // change later
+
     if(RobotContainer.xboxController.getStartButton()){
+      start = true;
+    }
+    if(RobotContainer.xboxController.getBackButton()){
+      start = false;
+    }
+
+    if(start){
       turretSub.autonomousTurret();
+    }
+    else {
+      turretSub.turretStop();
     }
   }
 

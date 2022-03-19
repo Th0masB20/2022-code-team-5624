@@ -15,7 +15,7 @@ public class AutonomousSubsystem extends SubsystemBase {
   double driveFor = 3;
   double stopFor = 2;
   boolean startRotation = false;
-  double speed = 0.3;
+  double speed = 0.6;
   boolean reset = false;
   
   /** Creates a new AutonomousSubsystem. */
@@ -27,20 +27,18 @@ public class AutonomousSubsystem extends SubsystemBase {
   }
 
   public void runAutonomous(){
-    turretSub.autonomousTurret();
     if(timer.get() < driveFor){
-      driveSub.driveStraight(0.05,0);
+      driveSub.drive(speed, speed);
     }
-
-    if(timer.get() > driveFor && timer.get() < stopFor){
+    else {
       driveSub.stop();
     }
+
+    /*
     else{
       turretSub.autonomousTurret();
     }
-
     
-    /**
     else {
       startRotation = true;
     }
@@ -63,7 +61,7 @@ public class AutonomousSubsystem extends SubsystemBase {
   }
 
   public void testTurret(){
-    turretSub.autonomousTurret();
+    turretSub.shootMotor1.set(0.1);
   }
   public void start(){
     timer.start();

@@ -4,15 +4,12 @@
 
 package frc.robot.subsystems;
 
-import java.nio.channels.ShutdownChannelGroupException;
-
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.PID;
@@ -20,9 +17,9 @@ import frc.robot.PID;
 
 public class TurretSubsystem extends SubsystemBase {
   
-  WPI_TalonFX shootMotor1;
-  WPI_TalonFX shootMotor2; 
-  VictorSP rotateMotor;
+  WPI_TalonFX shootMotor1; //back
+  WPI_TalonFX shootMotor2; //front
+  TalonSRX rotateMotor;
   VisionSubsystem vision;
 
   double kp = 0.1;
@@ -35,16 +32,16 @@ public class TurretSubsystem extends SubsystemBase {
 
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
-    shootMotor1 = new WPI_TalonFX(Constants.shootPort1);
-    shootMotor2 = new WPI_TalonFX(Constants.shootPort2);
-    rotateMotor = new VictorSP(Constants.turretRotatePort);;
+    shootMotor1 = new WPI_TalonFX(Constants.shootPort1); //can id1
+    shootMotor2 = new WPI_TalonFX(Constants.shootPort2); //cam id2
+    rotateMotor = new TalonSRX(Constants.turretRotatePort);
 
     vision = new VisionSubsystem();
   }
 
   public void turnTurret() {
     if (vision.getTx()!=0){
-      rotateMotor.set(turretPID.calculatePid(vision.getTx()));
+      rotateMotor.set(TalonSRXControlMode.PercentOutput, turretPID.calculatePid(vision.getTx()));
     } else {
       turretStop();
     }
@@ -68,21 +65,51 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void manualTurret(double turn){
-    rotateMotor.set(turn * 0.3);
+      if(turn > 0.1){
+        rotateMotor.set(TalonSRXControlMode.PercentOutput,turn);
+      }
+      else if(turn < -0.1){
+        rotateMotor.set(TalonSRXControlMode.PercentOutput,turn);
+      }
+      else {
+        turretStop();
+      }
+
+      /*
+    if((turnRight) > 0){
+      rotateMotor.set(turnRight);
+      SmartDashboard.putNumber("turret", rotateMotor.get());
+      System.out.println(rotateMotor.get());
+    }
+    else if(turnLeft > 0){
+      rotateMotor.set(turnRight);
+      SmartDashboard.putNumber("turret", rotateMotor.get());
+      System.out.println(rotateMotor.get());
+    } 
+    else{
+      rotateMotor.set(0);
+    }
+    */
   }
 
   public void turretStop() {
-    rotateMotor.set(0);
+    rotateMotor.set(TalonSRXControlMode.PercentOutput,0);
   }
 
   public void shootBall(double distance) {
-    wantedSpeed = -0.3;
-    shootMotor1.set(wantedSpeed); 
-    shootMotor2.set(wantedSpeed - 0.2);
-    SmartDashboard.putNumber("distance", vision.getDistance());
-    SmartDashboard.putNumber("wanted speed", wantedSpeed);
+    wantedSpeed = -0.2;
+    shootMotor1.set(wantedSpeed); //slower 
+    shootMotor2.set(wantedSpeed - 0.2); // faster
   }
 
+  public boolean waitTime (long start) {
+    if (System.currentTimeMillis() - start > 250 ) 
+    {
+      return true;
+    }
+    return false;
+
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

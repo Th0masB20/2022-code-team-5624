@@ -13,7 +13,6 @@ public class DriveCommand extends CommandBase {
   /** Creates a new DriveCommand. */
   public DriveCommand(DriveSubsystem drive) {
     driveSub = drive;
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveSub);
   }
 

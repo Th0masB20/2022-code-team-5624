@@ -5,23 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ClimbPistonSubsystem;
-import frc.robot.subsystems.GearPistonSubsystem;
 import frc.robot.subsystems.IntakePistonSubsystem;
 
 public class PistonCommand extends CommandBase {
-  ClimbPistonSubsystem climbSub;
-  GearPistonSubsystem gearSub;
   IntakePistonSubsystem intakeSub;
   /** Creates a new PistonCommand. */
-  public PistonCommand(/*ClimbPistonSubsystem climbSub*/ GearPistonSubsystem gearSub, IntakePistonSubsystem intakeSub) {
-    //this.climbSub = climbSub;
-    this.gearSub = gearSub;
+  public PistonCommand(IntakePistonSubsystem intakeSub) {
     this.intakeSub = intakeSub;
-    //Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(/*this.climbSub*/this.gearSub, this.intakeSub);
+    addRequirements(this.intakeSub);
   }
 
   // Called when the command is initially scheduled.
@@ -31,10 +23,6 @@ public class PistonCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*
-    climbSub.useClimbPistons(RobotContainer.xboxController.getRawButton(Constants.climbAxis));
-    gearSub.useGearPistons(RobotContainer.xboxController.getRawButton(Constants.gearAxis));
-    */
     intakeSub.useIntakePistons(RobotContainer.xboxController.getAButton());
   }
 

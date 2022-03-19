@@ -25,10 +25,11 @@ public class IntakePistonSubsystem extends SubsystemBase {
       counter++;
       timer = System.currentTimeMillis();
     } 
-    if(active && counter == 1 && waitTime(timer))
-    intakeSolenoid.set(Value.kReverse);
-    counter--;
-    timer = System.currentTimeMillis();
+    if(active && counter == 1 && waitTime(timer)){
+      intakeSolenoid.set(Value.kReverse);
+      counter--;
+      timer = System.currentTimeMillis();
+    }
   }
 
   private boolean waitTime (long start) {

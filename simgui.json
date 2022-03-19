@@ -19,6 +19,7 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/AutonomousSubsystem": "Subsystem",
       "/LiveWindow/ClimbPistonSubsystem": "Subsystem",
       "/LiveWindow/DriveSubsystem": "Subsystem",
       "/LiveWindow/GearPistonSubsystem": "Subsystem",
@@ -26,7 +27,20 @@
       "/LiveWindow/IntakePistonSubsystem": "Subsystem",
       "/LiveWindow/MotorSubsystem": "Subsystem",
       "/LiveWindow/TurretSubsystem": "Subsystem",
+      "/LiveWindow/Ungrouped/MotorControllerGroup[1]": "Motor Controller",
+      "/LiveWindow/Ungrouped/MotorControllerGroup[2]": "Motor Controller",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/Talon FX [0]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [8]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [9]": "Motor Controller",
+      "/LiveWindow/Ungrouped/VictorSP[10]": "Motor Controller",
+      "/LiveWindow/Ungrouped/VictorSP[1]": "Motor Controller",
+      "/LiveWindow/Ungrouped/VictorSP[2]": "Motor Controller",
+      "/LiveWindow/Ungrouped/VictorSP[4]": "Motor Controller",
+      "/LiveWindow/Ungrouped/VictorSP[6]": "Motor Controller",
+      "/LiveWindow/Ungrouped/VictorSP[7]": "Motor Controller",
+      "/LiveWindow/Ungrouped/VictorSP[9]": "Motor Controller",
+      "/LiveWindow/Ungrouped/navX-Sensor[4]": "Gyro",
       "/LiveWindow/VisionSubsystem": "Subsystem"
     }
   },

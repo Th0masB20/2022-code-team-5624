@@ -4,68 +4,69 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class MotorSubsystem extends SubsystemBase {
-  VictorSP intakeMotor;
-  VictorSP beltMotor;
-  VictorSP climbMotor1,climbMotor2;
+  VictorSPX intakeMotor;
+  VictorSPX beltMotor;
+  VictorSPX climbMotor1,climbMotor2;
   /** Creates a new MotorIntakeSubsystem. */
   public MotorSubsystem() {
-    intakeMotor = new VictorSP(Constants.intakeMotorPort);
-    beltMotor = new VictorSP(Constants.beltMotorPort);
-    climbMotor1 = new VictorSP(Constants.pistonMotorPort1);
-    climbMotor2 = new VictorSP(Constants.pistonMotorPort2);
+    intakeMotor = new VictorSPX(Constants.intakeMotorPort);
+    //beltMotor = new VictorSPX(Constants.beltMotorPort);
+
+    climbMotor1 = new VictorSPX(Constants.pistonMotorPort1);
+    climbMotor2 = new VictorSPX(Constants.pistonMotorPort2);
   }
 
   //intake motor
   public void useIntakeMotor(double outSpeed, double inSpeed) {
     if(outSpeed > 0){
-      intakeMotor.set(outSpeed);
+      intakeMotor.set(VictorSPXControlMode.PercentOutput,-outSpeed);
     }
-    else {
-      stopIntakeMotors();
-    }
-
-    if(inSpeed > 0){
-      intakeMotor.set(inSpeed);
+    else if(inSpeed > 0){
+      intakeMotor.set(VictorSPXControlMode.PercentOutput,inSpeed);
     }
     else {
       stopIntakeMotors();
     }
   }
-
+  
   //belt motor
   public void useBeltMotor(double speed) {
     if (speed<-0.2||speed>0.2) {
-      beltMotor.set(speed);
+      beltMotor.set(VictorSPXControlMode.PercentOutput,speed);
     } else {
       stopBeltMotors();
     }
   }
-
+  
   //climb motor
   public void useClimbMotors(double speed) {
-    if (speed<-0.2||speed>0.2) {
-      climbMotor1.set(speed);
-      climbMotor2.set(speed);
+    if (speed<-0.2||speed>0.2) 
+    {
+      climbMotor1.set(VictorSPXControlMode.PercentOutput, speed);
+      climbMotor2.set(VictorSPXControlMode.PercentOutput, speed);
     } else {
-      stopClimbMotors();;
+      stopClimbMotors();
     }
   }
 
   public void stopIntakeMotors(){
-    intakeMotor.set(0);
+    intakeMotor.set(VictorSPXControlMode.PercentOutput,0);
   }
 
   public void stopClimbMotors(){
-    climbMotor1.set(0);
-    climbMotor2.set(0);
+    climbMotor1.set(VictorSPXControlMode.PercentOutput, 0);
+    climbMotor2.set(VictorSPXControlMode.PercentOutput, 0);
   }
-
+  
   public void stopBeltMotors(){
-    beltMotor.set(0);
+    beltMotor.set(VictorSPXControlMode.PercentOutput, 0);
   }
+  
 }

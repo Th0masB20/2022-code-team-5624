@@ -4,15 +4,12 @@
 
 package frc.robot.subsystems;
 
-import java.lang.annotation.Target;
-
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -21,13 +18,11 @@ import frc.robot.PID;
 //two encoders
 
 public class DriveSubsystem extends SubsystemBase {
-  private VictorSP motorR1;
-  private VictorSP motorR2;
-  private VictorSP motorR3;
+  private Spark motorR1;
+  private Spark motorR2;
 
-  private VictorSP motorL1;
-  private VictorSP motorL2;
-  private VictorSP motorL3;
+  private Spark motorL1;
+  private Spark motorL2;
 
   AHRS gyro;
   PID rotatePid, drivePid;
@@ -47,13 +42,11 @@ public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() 
   {
-    motorR1 = new VictorSP(Constants.vPortR1);
-    motorR2 = new VictorSP(Constants.vPortR2);
-    motorR3 = new VictorSP(Constants.vPortR3); 
+    motorR1 = new Spark(Constants.CANPortR1);
+    motorR2 = new Spark(Constants.CANPortR2);
 
-    motorL1 = new VictorSP(Constants.vPortL1);
-    motorL2 = new VictorSP(Constants.vPortL2);
-    motorL3 = new VictorSP(Constants.vPortL3);
+    motorL1 = new Spark(Constants.CANPortL1);
+    motorL2 = new Spark(Constants.CANPortL2);
     
     rightGroup = new MotorControllerGroup(motorR1, motorR2);
     leftGroup = new MotorControllerGroup(motorL1, motorL2);
@@ -67,10 +60,13 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void drive(double leftY, double rightY) 
   {
-    rightGroup.set(-rightY * 0.75f);
-    motorR3.set(rightY * 0.75f);
-    leftGroup.set(leftY * 0.75f);
-    motorL3.set(-leftY * 0.75f);
+    if(rightY > 0.03 || rightY < -0.03 || leftY > 0.03 || leftY < -0.03){
+      rightGroup.set(Math.abs(rightY) * rightY);
+      leftGroup.set(Math.abs(leftY) * leftY);
+    }
+    else{
+      stop();
+    }
   }
 
   public void driveStraight(double speed, double target)
