@@ -4,29 +4,31 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.PID; 
+import frc.robot.PID;
 
 //two encoders
 
 public class DriveSubsystem extends SubsystemBase {
-  private Spark motorR1;
-  private Spark motorR2;
+  private CANSparkMax motorR1;
+  private CANSparkMax motorR2;
 
-  private Spark motorL1;
-  private Spark motorL2;
+  private CANSparkMax motorL1;
+  private CANSparkMax motorL2;
 
-  AHRS gyro;
+  private AHRS gyro;
   PID rotatePid, drivePid;
-  double kp, ki;
+  double kp = 0.1, ki = 0;
   double kpDrive, kiDrive;
   
   private MotorControllerGroup rightGroup;
@@ -42,11 +44,11 @@ public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() 
   {
-    motorR1 = new Spark(Constants.CANPortR1);
-    motorR2 = new Spark(Constants.CANPortR2);
+    motorR1 = new CANSparkMax(Constants.CANPortR1, MotorType.kBrushless);
+    motorR2 = new CANSparkMax(Constants.CANPortR2, MotorType.kBrushless);
 
-    motorL1 = new Spark(Constants.CANPortL1);
-    motorL2 = new Spark(Constants.CANPortL2);
+    motorL1 = new CANSparkMax(Constants.CANPortL1, MotorType.kBrushless);
+    motorL2 = new CANSparkMax(Constants.CANPortL2, MotorType.kBrushless);
     
     rightGroup = new MotorControllerGroup(motorR1, motorR2);
     leftGroup = new MotorControllerGroup(motorL1, motorL2);
@@ -60,9 +62,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void drive(double leftY, double rightY) 
   {
+    SmartDashboard.putNumber("angle", gyro.getAngle());
     if(rightY > 0.03 || rightY < -0.03 || leftY > 0.03 || leftY < -0.03){
-      rightGroup.set(Math.abs(rightY) * rightY);
-      leftGroup.set(Math.abs(leftY) * leftY);
+      rightGroup.set(rightY * 0.5);
+      leftGroup.set(leftY * 0.5);
     }
     else{
       stop();
@@ -83,17 +86,20 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("speed right", rightSpeed);
   }
 
-  public void rotateToTarget(double speed, double target)
+  public void rotateToTarget(double target)
   {
+    SmartDashboard.putNumber("error", error);
+    SmartDashboard.putNumber("value", value);
+
     error = target - gyro.getAngle();
     value = rotatePid.calculatePid(error);
-    rightSpeed = speed + value;
-    leftSpeed = speed - value;
+    rightSpeed = value;
+    leftSpeed = value;
 
-    if((rightSpeed > 0.5 || leftSpeed > 0.5) || (rightSpeed < -0.5 || leftSpeed < -0.5))
+    if((rightSpeed > 0.4 || leftSpeed > 0.4) || (rightSpeed < -0.4 || leftSpeed < -0.4))
     {
-       rightGroup.set(0.5);
-       leftGroup.set(0.5);
+       rightGroup.set(0.4);
+       leftGroup.set(0.4);
     }
     else
     {
@@ -147,5 +153,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void resetGyro(){
     gyro.reset();
+  }
+  public double getGyro(){
+     return gyro.getAngle();
   }
 }

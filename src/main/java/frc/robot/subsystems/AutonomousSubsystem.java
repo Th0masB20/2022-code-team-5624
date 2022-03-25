@@ -5,7 +5,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 
 public class AutonomousSubsystem extends SubsystemBase {
   TurretSubsystem turretSub;
@@ -27,6 +29,10 @@ public class AutonomousSubsystem extends SubsystemBase {
   }
 
   public void runAutonomous(){
+    driveSub.rotateToTarget(0);
+    
+    //turretSub.turnTurret();
+    /*
     if(timer.get() < driveFor){
       driveSub.drive(speed, speed);
     }
@@ -34,7 +40,7 @@ public class AutonomousSubsystem extends SubsystemBase {
       driveSub.stop();
     }
 
-    /*
+    
     else{
       turretSub.autonomousTurret();
     }
@@ -61,7 +67,7 @@ public class AutonomousSubsystem extends SubsystemBase {
   }
 
   public void testTurret(){
-    turretSub.shootMotor1.set(0.1);
+    turretSub.manualTurret(RobotContainer.xboxController.getLeftX());;
   }
   public void start(){
     timer.start();

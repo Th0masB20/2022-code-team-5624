@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.DriveCommand;
@@ -46,17 +47,17 @@ public class RobotContainer {
   public RobotContainer() {
     //subsystems
     driveSub = new DriveSubsystem();
-    intakePistonSub = new IntakePistonSubsystem();
-    motorIntakeSub = new MotorSubsystem();
+    //intakePistonSub = new IntakePistonSubsystem();
+    //motorIntakeSub = new MotorSubsystem();
     turretSub = new TurretSubsystem();
     autoSub = new AutonomousSubsystem(turretSub, driveSub);
     
     //command
     driveCmd = new DriveCommand(driveSub);
-    pistonCmd = new PistonCommand(intakePistonSub);
-    intakeCmd = new MotorCommand(motorIntakeSub, turretSub);
+    //pistonCmd = new PistonCommand(intakePistonSub);
+    //intakeCmd = new MotorCommand(motorIntakeSub, turretSub);
 
-    autonomousCmd = new AutonomousCommand(autoSub); // this needs autosub
+    autonomousCmd = new AutonomousCommand(autoSub, turretSub); // this needs autosub
 
     //controllers
     stickLeft = new Joystick(Constants.stickPortL);
@@ -65,18 +66,15 @@ public class RobotContainer {
   
     //defailt commands
     driveSub.setDefaultCommand(driveCmd);
-    intakePistonSub.setDefaultCommand(pistonCmd);
-    motorIntakeSub.setDefaultCommand(intakeCmd);
+    autoSub.setDefaultCommand(autonomousCmd);
+    //intakePistonSub.setDefaultCommand(pistonCmd);
+    //motorIntakeSub.setDefaultCommand(intakeCmd);
 
     //compressor = new Compressor(PneumaticsModuleType.REVPH);
     //compressor.disable();
     //compressor.enableDigital();
     
     // Configure the button bindings
-
-    turretSub = new TurretSubsystem();
-    autoSub = new AutonomousSubsystem(turretSub, driveSub);
-    autonomousCmd = new AutonomousCommand(autoSub); // this needs autosub
     configureButtonBindings();
     
   }
@@ -96,7 +94,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    //return autonomousCmd;
-    return driveCmd;
+    return autonomousCmd;
   }
 }

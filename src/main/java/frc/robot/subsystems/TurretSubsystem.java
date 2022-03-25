@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.PID;
@@ -41,10 +42,11 @@ public class TurretSubsystem extends SubsystemBase {
 
   public void turnTurret() {
     if (vision.getTx()!=0){
-      rotateMotor.set(TalonSRXControlMode.PercentOutput, turretPID.calculatePid(vision.getTx()));
+      rotateMotor.set(TalonSRXControlMode.PercentOutput,-(vision.getTx()/27) * 0.2 /*turretPID.calculatePid(vision.getTx())*/);
     } else {
       turretStop();
     }
+    
     if (vision.getTx()==0)
     {
       timer.start();
@@ -65,6 +67,7 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void manualTurret(double turn){
+    SmartDashboard.putNumber("xbox", turn);
       if(turn > 0.1){
         rotateMotor.set(TalonSRXControlMode.PercentOutput,turn);
       }

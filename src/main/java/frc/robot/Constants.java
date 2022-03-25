@@ -14,12 +14,11 @@ package frc.robot;
  */
 public final class Constants {
     //chassi motor ports
-    //2 falcon - turret shoot
-    public static final int CANPortR1 = 3;
-    public static final int CANPortR2 = 5;
+    public static final int CANPortR1 = 7;
+    public static final int CANPortR2 = 8;
 
-    public static final int CANPortL1 = 0;
-    public static final int CANPortL2 = 1;
+    public static final int CANPortL1 = 9;
+    public static final int CANPortL2 = 10;
 
     //joystick ports
     public static final int stickPortL = 1;
@@ -35,8 +34,8 @@ public final class Constants {
     //turret motors
     //all can id
     public static final int shootPort1 = 0;
-    public static final int shootPort2 = 9;
-    public static final int turretRotatePort = 7;
+    public static final int shootPort2 = 1;
+    public static final int turretRotatePort = 6;
 
     //intake
     public static final int intakeMotorPort = 6;
