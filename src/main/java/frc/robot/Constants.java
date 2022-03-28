@@ -21,8 +21,8 @@ public final class Constants {
     public static final int CANPortL2 = 10;
 
     //joystick ports
-    public static final int stickPortL = 1;
-    public static final int stickPortR = 2;
+    public static final int stickPortL = 2;
+    public static final int stickPortR = 1;
     
     //xbox
     public static final int xboxPort = 0;

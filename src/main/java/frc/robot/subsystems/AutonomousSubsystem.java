@@ -28,8 +28,8 @@ public class AutonomousSubsystem extends SubsystemBase {
   }
 
   public void runAutonomous(){
-    driveSub.driveStraight(0,0);   
-    //turretSub.autonomousTurret();
+    //driveSub.driveStraight(0,0);   
+    turretSub.autonomousTurret();
     /*
     if(timer.get() < driveFor){
       driveSub.driveStraight(speed, 0);

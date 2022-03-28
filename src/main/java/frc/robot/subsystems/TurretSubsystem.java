@@ -4,11 +4,13 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.PID;
@@ -59,6 +61,8 @@ public class TurretSubsystem extends SubsystemBase {
 
   public void autonomousTurret () {
     turnTurret();
+    shootBall(vision.getDistance());
+    SmartDashboard.putNumber("Distance", vision.getDistance());
     /*
       if (timer.get() > 0.69){
         shootBall(vision.getDistance());
@@ -79,9 +83,9 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void shootBall(double distance) {
-    wantedSpeed = -0.2;
+    wantedSpeed = 0.4;
     shootMotor1.set(wantedSpeed); //slower 
-    shootMotor2.set(wantedSpeed - 0.2); // faster
+    shootMotor2.set(wantedSpeed * 5); // faster
   }
 
   public void turretStop() {

@@ -65,7 +65,7 @@ public class RobotContainer {
 
     //defailt commands
     driveSub.setDefaultCommand(driveCmd);
-    autoSub.setDefaultCommand(autonomousCmd);
+    //autoSub.setDefaultCommand(autonomousCmd);
     //intakePistonSub.setDefaultCommand(pistonCmd);
     //motorIntakeSub.setDefaultCommand(intakeCmd);
 

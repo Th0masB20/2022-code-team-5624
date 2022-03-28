@@ -27,9 +27,8 @@ public class DriveSubsystem extends SubsystemBase {
   private CANSparkMax motorL2;
 
   private AHRS gyro;
-  PID rotatePid, drivePid;
+  PID drivePid;
   double kp = 0.1, ki = 0;
-  double kpDrive, kiDrive;
   
   private MotorControllerGroup rightGroup;
   private MotorControllerGroup leftGroup;
@@ -54,17 +53,16 @@ public class DriveSubsystem extends SubsystemBase {
     leftGroup = new MotorControllerGroup(motorL1, motorL2);
 
     gyro = new AHRS(SPI.Port.kMXP);
-    rotatePid = new PID(kp, ki);
-    drivePid = new PID(kpDrive, kiDrive);
+    drivePid = new PID(kp, ki);
     timer = new Timer();
   }
 
 
-  public void drive(double leftY, double rightY) 
+  public void drive(double leftY, double rightY, double analogRead) 
   {
     if(rightY > 0.03 || rightY < -0.03 || leftY > 0.03 || leftY < -0.03){
-      rightGroup.set(rightY * 0.5);
-      leftGroup.set(leftY * 0.5);
+      rightGroup.set(rightY * (0.50 - (0.25 * analogRead)) );
+      leftGroup.set(-leftY * (0.50 - (0.25 * analogRead)) );
     }
     else{
       stop();
@@ -76,33 +74,13 @@ public class DriveSubsystem extends SubsystemBase {
     error = target - gyro.getAngle();
     value = drivePid.calculatePid(error);
     rightSpeed = speed + value;
-    leftSpeed = speed - value;
-
-    if((rightSpeed < 0.4 || leftSpeed < 0.4) || (rightSpeed > -0.4 || leftSpeed > -0.4))
+    leftSpeed = speed + value;
+    if((rightSpeed < 0.4 || leftSpeed < -0.4) || (rightSpeed > -0.4 || leftSpeed > -0.4))
     {
-      rightGroup.set(rightSpeed);
-      leftGroup.set(leftSpeed);
-    }
-    
-    SmartDashboard.putNumber("angle difference", error);
-    SmartDashboard.putNumber("speed left", leftSpeed);
-    SmartDashboard.putNumber("speed right", rightSpeed);
-  }
-
-  public void rotateToTarget(double target)
-  {
-    error = target - gyro.getAngle();
-    value = rotatePid.calculatePid(error);
-    rightSpeed = value;
-    leftSpeed = value;
-
-    if((rightSpeed > 0.4 || leftSpeed > 0.4) || (rightSpeed < -0.4 || leftSpeed < -0.4))
-    {
-       rightGroup.set(0.4);
-       leftGroup.set(0.4);
-    }
-    else
-    {
+      //SmartDashboard.putNumber("angle difference", error);
+      //SmartDashboard.putNumber("speed left", rightGroup.get());
+      //SmartDashboard.putNumber("speed right", leftGroup.get());
+  
       rightGroup.set(rightSpeed);
       leftGroup.set(leftSpeed);
     }

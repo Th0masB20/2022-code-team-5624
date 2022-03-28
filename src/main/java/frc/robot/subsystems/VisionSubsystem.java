@@ -12,15 +12,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class VisionSubsystem extends SubsystemBase {
   NetworkTable limelightTable;
   double cameraAngle = 30; //degress 
-  double cameraHeight = 1.1666; //feet
-  double hubHeight = 8.6666; //m
+  double cameraHeight = 2.66666; //feet
+  double hubHeight = 8.6666; //feet
   //Ultrasonic ultraSensor;
 
   /** Creates a new VisionSubsystem. */
   public VisionSubsystem() {
     limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
-    //ultraSensor = new Ultrasonic(Constants.sonicDIO1, Constants.sonicDIO2);
-    //ultraSensor.setAutomaticMode(true);
   }
   public double getTx() {
     return limelightTable.getEntry("tx").getDouble(0.0);
