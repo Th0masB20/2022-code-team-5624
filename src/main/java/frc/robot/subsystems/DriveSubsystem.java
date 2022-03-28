@@ -62,7 +62,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void drive(double leftY, double rightY) 
   {
-    SmartDashboard.putNumber("angle", gyro.getAngle());
     if(rightY > 0.03 || rightY < -0.03 || leftY > 0.03 || leftY < -0.03){
       rightGroup.set(rightY * 0.5);
       leftGroup.set(leftY * 0.5);
@@ -79,8 +78,12 @@ public class DriveSubsystem extends SubsystemBase {
     rightSpeed = speed + value;
     leftSpeed = speed - value;
 
-    drive(speed, speed);
-
+    if((rightSpeed < 0.4 || leftSpeed < 0.4) || (rightSpeed > -0.4 || leftSpeed > -0.4))
+    {
+      rightGroup.set(rightSpeed);
+      leftGroup.set(leftSpeed);
+    }
+    
     SmartDashboard.putNumber("angle difference", error);
     SmartDashboard.putNumber("speed left", leftSpeed);
     SmartDashboard.putNumber("speed right", rightSpeed);
@@ -88,9 +91,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void rotateToTarget(double target)
   {
-    SmartDashboard.putNumber("error", error);
-    SmartDashboard.putNumber("value", value);
-
     error = target - gyro.getAngle();
     value = rotatePid.calculatePid(error);
     rightSpeed = value;
@@ -108,43 +108,6 @@ public class DriveSubsystem extends SubsystemBase {
     }
   }
 
-  public void rotateUsingCamera(double speed, double error)
-  {
-    value = rotatePid.calculatePid(error);
-    rightSpeed = speed + value;
-    leftSpeed = speed - value;
-
-    if((rightSpeed > 0.5 || leftSpeed > 0.5) || (rightSpeed < -0.5 || leftSpeed < -0.5))
-    {
-       rightGroup.set(0.5);
-       leftGroup.set(0.5);
-    }
-    else
-    {
-      rightGroup.set(rightSpeed);
-      leftGroup.set(leftSpeed);
-    }
-  }
-
-
-  public boolean facingTarget(double error)
-  {
-    if(error == 0)
-    {
-      timer.start();
-      if(timer.get() > 0.5)
-      {
-        return true;
-      }
-    }
-    else
-    {
-      timer.stop();
-      timer.reset();
-    }
-    return false;
-  }
-
   public void stop()
   {
     rightGroup.set(0);
@@ -154,7 +117,8 @@ public class DriveSubsystem extends SubsystemBase {
   public void resetGyro(){
     gyro.reset();
   }
-  public double getGyro(){
-     return gyro.getAngle();
+
+  public AHRS getGyro(){
+     return gyro;
   }
 }

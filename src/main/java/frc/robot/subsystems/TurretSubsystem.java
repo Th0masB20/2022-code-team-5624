@@ -4,13 +4,11 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.PID;
@@ -41,7 +39,8 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void turnTurret() {
-    if (vision.getTx()!=0){
+    //if target is not in the center
+    if(vision.getTx()!=0){
       rotateMotor.set(TalonSRXControlMode.PercentOutput,-(vision.getTx()/27) * 0.2 /*turretPID.calculatePid(vision.getTx())*/);
     } else {
       turretStop();
@@ -60,14 +59,14 @@ public class TurretSubsystem extends SubsystemBase {
 
   public void autonomousTurret () {
     turnTurret();
+    /*
       if (timer.get() > 0.69){
         shootBall(vision.getDistance());
     }
-    shootBall(vision.getDistance());
+    */
   }
 
   public void manualTurret(double turn){
-    SmartDashboard.putNumber("xbox", turn);
       if(turn > 0.1){
         rotateMotor.set(TalonSRXControlMode.PercentOutput,turn);
       }
@@ -77,26 +76,6 @@ public class TurretSubsystem extends SubsystemBase {
       else {
         turretStop();
       }
-
-      /*
-    if((turnRight) > 0){
-      rotateMotor.set(turnRight);
-      SmartDashboard.putNumber("turret", rotateMotor.get());
-      System.out.println(rotateMotor.get());
-    }
-    else if(turnLeft > 0){
-      rotateMotor.set(turnRight);
-      SmartDashboard.putNumber("turret", rotateMotor.get());
-      System.out.println(rotateMotor.get());
-    } 
-    else{
-      rotateMotor.set(0);
-    }
-    */
-  }
-
-  public void turretStop() {
-    rotateMotor.set(TalonSRXControlMode.PercentOutput,0);
   }
 
   public void shootBall(double distance) {
@@ -105,14 +84,10 @@ public class TurretSubsystem extends SubsystemBase {
     shootMotor2.set(wantedSpeed - 0.2); // faster
   }
 
-  public boolean waitTime (long start) {
-    if (System.currentTimeMillis() - start > 250 ) 
-    {
-      return true;
-    }
-    return false;
-
+  public void turretStop() {
+    rotateMotor.set(TalonSRXControlMode.PercentOutput,0);
   }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

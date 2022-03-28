@@ -17,7 +17,6 @@ public class MotorSubsystem extends SubsystemBase {
   /** Creates a new MotorIntakeSubsystem. */
   public MotorSubsystem() {
     intakeMotor = new VictorSPX(Constants.intakeMotorPort);
-    //beltMotor = new VictorSPX(Constants.beltMotorPort);
 
     climbMotor1 = new VictorSPX(Constants.pistonMotorPort1);
     climbMotor2 = new VictorSPX(Constants.pistonMotorPort2);
@@ -35,16 +34,7 @@ public class MotorSubsystem extends SubsystemBase {
       stopIntakeMotors();
     }
   }
-  
-  //belt motor
-  public void useBeltMotor(double speed) {
-    if (speed<-0.2||speed>0.2) {
-      beltMotor.set(VictorSPXControlMode.PercentOutput,speed);
-    } else {
-      stopBeltMotors();
-    }
-  }
-  
+
   //climb motor
   public void useClimbMotors(double speed) {
     if (speed<-0.2||speed>0.2) 
@@ -64,9 +54,4 @@ public class MotorSubsystem extends SubsystemBase {
     climbMotor1.set(VictorSPXControlMode.PercentOutput, 0);
     climbMotor2.set(VictorSPXControlMode.PercentOutput, 0);
   }
-  
-  public void stopBeltMotors(){
-    beltMotor.set(VictorSPXControlMode.PercentOutput, 0);
-  }
-  
 }

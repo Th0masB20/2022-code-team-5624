@@ -15,10 +15,10 @@ public class AutonomousCommand extends CommandBase {
   TurretSubsystem turret;
 
   /** Creates a new AutonomousCommand. */
-  public AutonomousCommand(AutonomousSubsystem autoSub,TurretSubsystem t) {
-    this.turret = t;
+  public AutonomousCommand(AutonomousSubsystem autoSub,TurretSubsystem turret) {
+    this.turret = turret;
     this.autoSub = autoSub;
-    addRequirements(autoSub, t);
+    addRequirements(this.autoSub, this.turret);
   }
 
   // Called when the command is initially scheduled.

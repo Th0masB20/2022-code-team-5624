@@ -39,7 +39,6 @@ public final class Constants {
 
     //intake
     public static final int intakeMotorPort = 6;
-    public static final int beltMotorPort = 12;
 
     public static final int pistonMotorPort1 = 8;
     public static final int pistonMotorPort2 = 9;

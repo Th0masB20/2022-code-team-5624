@@ -32,9 +32,4 @@ public class VisionSubsystem extends SubsystemBase {
   public double getDistance() {
     return (hubHeight-cameraHeight) / Math.tan(Math.toRadians(cameraAngle + getTy()));
   }
-/*
-  public boolean collectedBall(){
-    return (ultraSensor.getRangeInches() < 10);
-  }
-  */
 }

@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
@@ -29,46 +28,21 @@ public class AutonomousSubsystem extends SubsystemBase {
   }
 
   public void runAutonomous(){
-    driveSub.rotateToTarget(0);
-    
-    //turretSub.turnTurret();
+    driveSub.driveStraight(0,0);   
+    //turretSub.autonomousTurret();
     /*
     if(timer.get() < driveFor){
-      driveSub.drive(speed, speed);
+      driveSub.driveStraight(speed, 0);
     }
     else {
       driveSub.stop();
     }
-
-    
-    else{
+    if(timer.get() > driveFor){
       turretSub.autonomousTurret();
-    }
-    
-    else {
-      startRotation = true;
-    }
-    if(startRotation){
-      driveSub.rotateUsingCamera(speed, visionSub.getTx());
-    }
-
-    if(driveSub.facingTarget(visionSub.getTx()) && !visionSub.collectedBall()){
-      if(!reset){
-        driveSub.resetGyro();
-        reset = true;
-      }
-      driveSub.driveStraight(0.05,0);
-    }
-    
-    if(visionSub.collectedBall()){
-      turretSub.autonomousTurret();
-    }
+    } 
     */
   }
 
-  public void testTurret(){
-    turretSub.manualTurret(RobotContainer.xboxController.getLeftX());;
-  }
   public void start(){
     timer.start();
     driveSub.resetGyro();

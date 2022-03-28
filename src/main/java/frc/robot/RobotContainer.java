@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.DriveCommand;
@@ -35,21 +34,26 @@ public class RobotContainer {
   IntakePistonSubsystem intakePistonSub;
   MotorSubsystem motorIntakeSub;
   TurretSubsystem turretSub;
-  AutonomousSubsystem autoSub;
+  AutonomousSubsystem autoSub; //autonomus
 
   DriveCommand driveCmd;
   PistonCommand pistonCmd;
   MotorCommand intakeCmd;
-  AutonomousCommand autonomousCmd;
+  AutonomousCommand autonomousCmd; //autonomus
 
   // The robot's subsystems and commands are defined here...
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    //controllers
+    stickLeft = new Joystick(Constants.stickPortL);
+    stickRight = new Joystick(Constants.stickPortR);
+    xboxController = new XboxController(Constants.xboxPort);
+      
     //subsystems
     driveSub = new DriveSubsystem();
+    turretSub = new TurretSubsystem();
     //intakePistonSub = new IntakePistonSubsystem();
     //motorIntakeSub = new MotorSubsystem();
-    turretSub = new TurretSubsystem();
     autoSub = new AutonomousSubsystem(turretSub, driveSub);
     
     //command
@@ -59,11 +63,6 @@ public class RobotContainer {
 
     autonomousCmd = new AutonomousCommand(autoSub, turretSub); // this needs autosub
 
-    //controllers
-    stickLeft = new Joystick(Constants.stickPortL);
-    stickRight = new Joystick(Constants.stickPortR);
-    xboxController = new XboxController(Constants.xboxPort);
-  
     //defailt commands
     driveSub.setDefaultCommand(driveCmd);
     autoSub.setDefaultCommand(autonomousCmd);
